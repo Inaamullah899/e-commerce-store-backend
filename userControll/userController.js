@@ -24,17 +24,37 @@ module.exports = {
       });
     }
   },
+  updateUser: async (req, res, next) => {
+    try {
+      const { error, value } = userValidation.updateUser.validate({
+        userId: req.params.userId,
+      });
+      if (error) {
+        return res.send(error.details[0].message);
+      } else {
+        const updateUser = req.body;
+        const updated = await userService.updateUser(
+          req.params.userId,
+          updateUser,
+          value
+        );
+        res.send(updated);
+      }
+    } catch (error) {
+      res.send(error);
+    }
+  },
   deleteUser: async (req, res) => {
     try {
       const { error, value } = userValidation.deleteUser.validate({
-        userId: req.params.productID,
+        userId: req.params.userId,
       });
 
       if (error) {
         return res.send(error.details[0].message);
       }
 
-      const deleted = await userService.deleteUser(req.params.productID);
+      const deleted = await userService.deleteUser(req.params.userId);
       if (!deleted) {
         return res.status(404).send("User not found");
       }

@@ -14,6 +14,13 @@ module.exports = {
 
     return product;
   },
+  updateProduct: async (productID, updateProductData) => {
+    const product = await models.product.findByPk(productID);
+    if (product) {
+      product.update(updateProductData);
+    }
+    return product;
+  },
   deleteProduct: async (value) => {
     const deleted = await models.product.findByPk(value);
 

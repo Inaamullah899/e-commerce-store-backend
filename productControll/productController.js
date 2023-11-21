@@ -29,6 +29,26 @@ module.exports = {
       });
     }
   },
+  updateProduct: async (req, res, next) => {
+    try {
+      const { error, value } = productValidation.updateProduct.validate({
+        productID: req.params.productID,
+      });
+      if (error) {
+        return res.send(error.details[0].message);
+      } else {
+        const updateProduct = req.body;
+        const updated = await productService.updateProduct(
+          req.params.productID,
+          updateProduct,
+          value
+        );
+        res.send(updated);
+      }
+    } catch (error) {
+      res.send(error);
+    }
+  },
   createProduct: async (req, res) => {
     try {
       const { error, value } = productValidation.createProduct.validate(

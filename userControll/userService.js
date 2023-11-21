@@ -11,6 +11,13 @@ module.exports = {
 
     return user;
   },
+  updateUser: async (userId, updateUserData) => {
+    const user = await models.user.findByPk(userId);
+    if (user) {
+      user.update(updateUserData);
+    }
+    return user;
+  },
   deleteUser: async (value) => {
     // const { userId } = value;
     const deleted = await models.user.findByPk(value);

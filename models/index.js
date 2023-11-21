@@ -37,11 +37,11 @@ product.belongsTo(category, {
   },
 });
 product.belongsToMany(cart, {
-  through: "product-category",
+  through: "product-cart",
   foreignKey: "productID",
 });
 cart.belongsToMany(product, {
-  through: "product-category",
+  through: "product-cart",
   foreignKey: "cartID",
 });
 const models = config.models;
