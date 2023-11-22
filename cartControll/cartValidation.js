@@ -1,7 +1,7 @@
 const joi = require("joi");
 module.exports = {
   getCart: joi.object().keys({
-    userIDID: joi.number(),
+    userID: joi.number(),
   }),
   addToCart: joi.object().keys({
     id: joi.number(),
