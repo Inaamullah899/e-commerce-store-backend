@@ -1,11 +1,10 @@
 const { models } = require("../models");
 
 module.exports = {
-  getCart: async (userID) => {
-    console.log("Service Debug", userID);
+  getCart: async ({ userID }) => {
     try {
       const cart = await models.cart.findOne({
-        where: userID,
+        where: { userID: userID },
         include: [
           {
             model: models.product,
@@ -19,10 +18,7 @@ module.exports = {
     }
   },
   addToCart: async (data) => {
-    // console.log(data);
-    const cart = await models.cart.create(data.userID);
-    const product = await models.product.findByPk(data.id);
-    await cart.addProduct(data.product);
+    const cart = await models.cart.create(data);
     return cart;
   },
   updatCart: async (userId, updateCartData) => {

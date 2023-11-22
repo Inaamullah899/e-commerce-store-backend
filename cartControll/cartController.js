@@ -8,16 +8,14 @@ module.exports = {
   },
   addToCart: async (req, res) => {
     try {
-      const { error, value } = cartValidation.addToCart.validate({
-        id: req.params.productID,
-        ...req.body,
-      });
+      const { error, value } = cartValidation.addToCart.validate(req.body);
 
       if (error) {
         return res.send(error.details[0].message);
       }
 
       const data = await cartService.addToCart(value);
+
       res.send(data);
     } catch (err) {
       res.status(500).send({

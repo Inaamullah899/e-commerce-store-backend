@@ -4,7 +4,6 @@ module.exports = {
     userID: joi.number(),
   }),
   addToCart: joi.object().keys({
-    id: joi.number(),
     userID: joi.number(),
   }),
   updateCart: joi.object().keys({
